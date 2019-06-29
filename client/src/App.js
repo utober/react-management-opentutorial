@@ -63,6 +63,7 @@ class App extends React.Component {
   callApi = async () => {
     const response = await fetch('/api/customers');
     const body = await response.json();
+    console.log(body);
     return body;
   }
 
@@ -90,25 +91,28 @@ class App extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
+              {console.log('render() App -> this.state.customers ? :' + this.state.customers)}
               {this.state.customers ? 
-              this.state.customers.map(c => {
-                return (
-                  <Customer
-                    key={c.id}
-                    id={c.id}
-                    image={c.image}
-                    name={c.name}
-                    birthday={c.birthday}
-                    gender={c.gender}
-                    job={c.job}
-                    stateRefresh={this.stateRefresh}
-                  />
-                )
-              }) : 
+                this.state.customers.map(c => {
+                  return (
+                    <Customer
+                      key={c.id}
+                      id={c.id}
+                      image={c.image}
+                      name={c.name}
+                      birthday={c.birthday}
+                      gender={c.gender}
+                      job={c.job}
+                      stateRefresh={this.stateRefresh}
+                    />
+                  )
+                })
+              : 
               <TableRow>
                 <TableCell colSpan="6" align="center">
                   <CircularProgress className={classes.progress} variant="determinate" value={this.state.completed} />
                 </TableCell>
+                
               </TableRow>
               }
             </TableBody>
